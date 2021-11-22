@@ -1,0 +1,16 @@
+CLI command to pull EC2 and RDS Recommendation from Trusted Advisor
+
+For eC2:
+
+To find check ID :
+
+aws --region us-east-1 support describe-trusted-advisor-checks --language en --query 'checks[?category==`service_limits`]' (Or refer AWS forums)
+
+Once we have the checkID (like I am using "EC2 On-Demand instances - Standard") :
+
+aws support describe-trusted-advisor-check-result --region us-east-1 --check-id 0Xc6LMYG8P --output table --query 'result.sort_by(flaggedResources[?status!="ok"],&metadata[2])[].metadata' 
+
+
+For RDS:
+
+aws support describe-trusted-advisor-check-result --region us-east-1 --check-id 1qazXsw23e --output table --query 'result.sort_by(flaggedResources[?status!="ok"],&metadata[2])[].metadata'
