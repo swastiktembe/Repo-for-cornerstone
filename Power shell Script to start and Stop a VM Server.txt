@@ -1,0 +1,51 @@
+
+1. Power shell Script to start/Stop a VM Server (I have mentioned method to start stop multiple VM's at one go)
+
+
+To start>>
+
+workflow startvms
+
+{
+
+sequence
+
+{
+
+Start-vm -name dc1
+
+Start-vm name mdt
+
+Start-vm name bckserver
+
+}
+
+}
+
+startvms
+
+
+
+
+
+To stop>>
+
+workflow stopvms
+
+{
+
+sequence
+
+{
+
+Stop-vm -name dc1
+
+Stop-vm name mdt
+
+Stop-vm name bckserver
+
+}
+
+}
+
+stopvms

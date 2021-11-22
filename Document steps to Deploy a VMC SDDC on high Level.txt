@@ -1,0 +1,57 @@
+Document steps to Deploy a VMC SDDC on high Level
+
+1. Create a VPC
+
+During the creation of the VPC we can define a Name for our VPC and we must define a network range for it.
+
+2. In the next step we will need to configure subnet for our VPC.
+
+In the SUBNET creation dialog fill out the neccesary information per Availibility Zone.
+
+#      select newly created VPC
+
+#      give it a descriptive name
+
+#      choose a Availability Zone
+
+#      enter a network range
+
+#      then create
+
+
+3. Now we have to Create a SDDC
+after Logging into  our vmware infra   
+
+goto Cloud Services Console>> Services>> VMware Cloud on AWS>> SDDCs>> then CREATE SDDC
+
+
+then defime required infor for creation of the SDDC :
+
+·        Region where our SDDC should be located            
+·        deployment type                                                    
+·        Host type                                                                   
+·        SDDC name                                                              
+·        Number of hosts (cluster size)                                 
+·        Management Appliance size                                   
+
+
+
+4. Now we will tie up SDDC to the AWS account.
+
+Create cloud formation stack creation>> accept the changes to IAM resources by clicking on Create stack>>THen refresh until it fetches and syncs>> once finished switch back to VMware Cloud Console.
+
+Back in VMware Cloud console we shall see, that all the information is now there so proceed further.
+
+here we configure the VPC and the Subnet we configured in the AWS console as we started out.
+
+Now configure the range for our management network, depending on the size of SDDC.
+
+Few things to remember
+
+·        No overlapping IP ranges
+·        No reserved IP´s
+
+ then Deploy SDDC.
+
+ 
+ It will take min 2-3 hours to have this ready

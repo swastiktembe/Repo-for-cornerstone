@@ -1,0 +1,27 @@
+2. Script to Expand Linux Disk Space
+
+#!/bin/bash
+
+# extend existing partition
+(
+echo n  # create new partition
+echo p  # extended partition
+echo 1  # partition 1 (Depends)
+echo    # First sector (Accept default)
+echo    # Last sector (Accept default)
+echo t  # partition type
+echo 8e # type 8e , Linux LVM (Depends on what partition i am choosing it to be)
+echo w  # write changes 
+) | /fdisk /dev/xvda (My Drive/Partition)
+
+# make partition changes visible to the kernel without reboot
+ /partprobe (My Drive/Partition)
+
+# extend physical volume
+/sbin/pvresize /dev/xvda5
+
+# extend logical volume to use all available space
+/lvextend -l +100%FREE (We can define the number if we want to) /dev/mapper/*(My Drive/Partition)--vg-root
+
+# resize filesystem - ext4
+/resize2fs /dev/mapper/*(My Drive/Partition)--vg-root
